@@ -16,40 +16,54 @@ LIGHT_CYAN = \033[1;36m
 WHITE = \033[1;37m
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g3
+FLAGS = -Wall -Wextra -Werror
 
-SRCS_DIR = src/
-SRCS = test.c
+LIB_PATH = ./lib/
+LIBFT_ARCH = $(LIB_PATH)libft/libft.a
+MLX_ARCH = $(LIB_PATH)MLX42/build/libmlx42.a
 
-OBJS_DIR = .build/
+SRCS = main.c
+
 OBJS = $(SRCS:.c=.o)
+SRCS_DIR = ./src/
+OBJS_DIR = ./.build/
+MLXFOLDER = ./lib/MLX42/
+MLXHEAD = $(MLXFOLDER)include/
+MLXLIB = $(MLXFOLDER)build/libmlx42.a -ldl -lglfw -pthread -lm
+SRCS_PREF = $(addprefix $(SRCS_DIR), $(SRCS))
 OBJS_PREF = $(addprefix $(OBJS_DIR), $(OBJS))
 
 NAME = cub3d
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
-	@cc $(FLAGS) -c $< -o $@
+	@cc $(FLAGS) -g -c $< -o $@
 
-$(NAME): $(OBJS_PREF)
-	@echo "|🛠️|$(LIGHT_GREEN)Program Compiled"
-	@$(CC) $(FLAGS) $(OBJS_PREF) -o $(NAME)
+$(NAME): $(OBJS_PREF) $(MLX_ARCH) $(LIBFT_ARCH)
+	@cc $(FLAGS) $(OBJS_PREF) $(MLXLIB) -g -o $(NAME)
+	@echo "$(GREEN)Program compiled"
+
+$(MLX_ARCH):
+	@mkdir -p $(MLXFOLDER)build
+	@cmake $(MLXFOLDER) -B $(MLXFOLDER)build
+	@make -C $(MLXFOLDER)build -j4
+	@echo "|🛠️|$(GREEN)MLX Compiled"
+
+$(LIBFT_ARCH):
+	@make -C lib/libft all
+	@echo "|📚|$(GREEN)Libft Compiled"
 
 all: $(NAME)
 
 clean:
 	@rm -rf $(OBJS_DIR)
-	@echo "|🗑️|Removing objects.."
+	@rm -rf $(MLXFOLDER)build
+	@echo "Removing objects & MLX42"
 
-fclean: clean
+fclean: clean 
 	@rm -f $(NAME)
-	@echo "|🧹|Cleaning.."
-
-test: all $(TEST)
-	@cc $(FLAGS) libft.a -o $(TEST:.c=)
-	@./$(TEST:.c=)
-	@rm -rf ./$(TEST:.c=)
+	@echo "Cleaning all"
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all libmlx clean fclean re
