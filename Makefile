@@ -22,7 +22,8 @@ LIB_PATH = ./lib/
 LIBFT_ARCH = $(LIB_PATH)libft/libft.a
 MLX_ARCH = $(LIB_PATH)MLX42/build/libmlx42.a
 
-SRCS = main.c
+SRCS = main.c \
+	   parsing/parsing.c
 
 OBJS = $(SRCS:.c=.o)
 SRCS_DIR = ./src/
@@ -36,11 +37,12 @@ OBJS_PREF = $(addprefix $(OBJS_DIR), $(OBJS))
 NAME = cub3d
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
-	@mkdir -p $(OBJS_DIR)
+	@mkdir -p $(dir $@)
 	@cc $(FLAGS) -g -c $< -o $@
 
 $(NAME): $(OBJS_PREF) $(MLX_ARCH) $(LIBFT_ARCH)
-	@cc $(FLAGS) $(OBJS_PREF) $(MLXLIB) -g -o $(NAME)
+	@make all -C lib/libft
+	@cc $(FLAGS) $(OBJS_PREF) $(LIBFT_ARCH) $(MLXLIB) -g -o $(NAME)
 	@echo "$(GREEN)Program compiled"
 
 $(MLX_ARCH):

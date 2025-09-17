@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:08:04 by mkettab           #+#    #+#             */
-/*   Updated: 2025/08/11 02:44:36 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/09/16 13:56:46 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIBFT_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 1
 # endif
 
 # include <fcntl.h>
@@ -66,6 +66,7 @@ char				**ft_split(char const *s, char c);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 int					ft_strcmp(char *s1, char *s2);
+int					ft_strrcmp(const char *s1, const char *s2);
 void				ft_freetab(char **str);
 
 // Bonus Part
@@ -107,5 +108,13 @@ int					ft_putunsint(long d);
 int					ft_puthex(unsigned long c, int low);
 int					ft_putptr(void *ptr);
 int					ft_printf(const char *s, ...);
+
+int					e_putchar(char c);
+int					e_putint(long d);
+int					e_putstr(char *str);
+int					e_putunsint(long d);
+int					e_puthex(unsigned long c, int low);
+int					e_putptr(void *ptr);
+int					e_printf(const char *s, ...);
 
 #endif

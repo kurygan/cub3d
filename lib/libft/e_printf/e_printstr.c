@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printstr.c                                      :+:      :+:    :+:   */
+/*   e_printstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:56:30 by mkettab           #+#    #+#             */
-/*   Updated: 2025/09/16 13:48:35 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/09/16 13:58:35 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_putstr(char *str)
+int	e_putstr(char *str)
 {
 	int	count;
 
 	if (!str)
-		return (ft_putstr("(null)"));
+		return (e_putstr("(null)"));
 	count = ft_strlen(str);
 	while (*str)
-		write(1, str++, 1);
+		write(STDERR_FILENO, str++, 1);
 	return (count);
 }
 
-int	ft_putchar(char c)
+int	e_putchar(char c)
 {
-	write(1, &c, 1);
+	write(STDERR_FILENO, &c, 1);
 	return (1);
 }
 
-int	ft_putptr(void *ptr)
+int	e_putptr(void *ptr)
 {
 	uintptr_t	converted;
 
 	converted = (uintptr_t) ptr;
 	if (!ptr)
-		return (ft_putstr("(nil)"));
-	write(2, "0x", 2);
-	return (ft_puthex((unsigned long)converted, 1) + 2);
+		return (e_putstr("(nil)"));
+	write(STDERR_FILENO, "0x", 2);
+	return (e_puthex((unsigned long)converted, 1) + 2);
 }

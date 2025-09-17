@@ -24,6 +24,7 @@ SRCS = str/ft_strnstr.c \
 	   str/ft_striteri.c \
 	   str/ft_freetab.c \
 	   str/ft_strcmp.c \
+	   str/ft_strrcmp.c \
 	   str/ft_strcpy.c \
 	   num/ft_atoi.c \
 	   num/ft_putint_fd.c \
@@ -53,6 +54,9 @@ SRCS = str/ft_strnstr.c \
 	   printf/ft_printf.c \
 	   printf/ft_printint.c \
 	   printf/ft_printstr.c \
+	   e_printf/e_printf.c \
+	   e_printf/e_printint.c \
+	   e_printf/e_printstr.c \
 	   gnl/get_next_line_utils.c \
 	   gnl/get_next_line.c
 

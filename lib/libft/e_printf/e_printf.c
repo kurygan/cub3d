@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   e_printf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 21:58:53 by mkettab           #+#    #+#             */
-/*   Updated: 2025/09/16 13:52:36 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/09/16 13:53:09 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,25 @@
 int	ft_args(char c, va_list *args)
 {
 	if (c == 'd' || c == 'i')
-		return (ft_putint(va_arg(*args, int)));
+		return (e_putint(va_arg(*args, int)));
 	else if (c == 's')
-		return (ft_putstr(va_arg(*args, char *)));
+		return (e_putstr(va_arg(*args, char *)));
 	else if (c == 'c')
-		return (ft_putchar(va_arg(*args, int)));
+		return (e_putchar(va_arg(*args, int)));
 	else if (c == 'u')
-		return (ft_putunsint(va_arg(*args, unsigned int)));
+		return (e_putunsint(va_arg(*args, unsigned int)));
 	else if (c == 'x')
-		return (ft_puthex(va_arg(*args, unsigned int), 1));
+		return (e_puthex(va_arg(*args, unsigned int), 1));
 	else if (c == 'X')
-		return (ft_puthex(va_arg(*args, unsigned int), 0));
+		return (e_puthex(va_arg(*args, unsigned int), 0));
 	else if (c == '%')
-		return (ft_putchar('%'));
+		return (e_putchar('%'));
 	else if (c == 'p')
-		return (ft_putptr(va_arg(*args, void *)));
+		return (e_putptr(va_arg(*args, void *)));
 	return (-1);
 }
 
-int	ft_printf(const char *s, ...)
+int	e_printf(const char *s, ...)
 {
 	int		final_len;
 	int		arg_len;
@@ -51,7 +51,7 @@ int	ft_printf(const char *s, ...)
 		}
 		else
 		{
-			write(1, s, 1);
+			write(STDERR_FILENO, s, 1);
 			final_len++;
 		}
 		if (*s)

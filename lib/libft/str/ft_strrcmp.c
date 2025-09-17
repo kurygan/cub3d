@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printstr.c                                      :+:      :+:    :+:   */
+/*   ft_strrcmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 00:56:30 by mkettab           #+#    #+#             */
-/*   Updated: 2025/09/16 13:48:35 by mkettab          ###   ########.fr       */
+/*   Created: 2025/09/15 23:03:32 by mkettab           #+#    #+#             */
+/*   Updated: 2025/09/15 23:07:10 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-int	ft_putstr(char *str)
+int	ft_strrcmp(const char *s1, const char *s2)
 {
-	int	count;
+	int	i;
+	int	j;
 
-	if (!str)
-		return (ft_putstr("(null)"));
-	count = ft_strlen(str);
-	while (*str)
-		write(1, str++, 1);
-	return (count);
-}
-
-int	ft_putchar(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-int	ft_putptr(void *ptr)
-{
-	uintptr_t	converted;
-
-	converted = (uintptr_t) ptr;
-	if (!ptr)
-		return (ft_putstr("(nil)"));
-	write(2, "0x", 2);
-	return (ft_puthex((unsigned long)converted, 1) + 2);
+	i = ft_strlen(s1) - 1;
+	j = ft_strlen(s2) - 1;
+	while (i >= 0 && j >= 0)
+	{
+		if (s1[i] != s2[j])
+			return (s1[i] - s2[j]);
+		i--;
+		j--;
+	}
+	return (0);
 }
