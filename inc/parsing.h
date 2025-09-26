@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/08 21:01:24 by mkettab           #+#    #+#             */
-/*   Updated: 2025/09/26 17:25:58 by mkettab          ###   ########.fr       */
+/*   Created: 2025/09/20 11:45:33 by mkettab           #+#    #+#             */
+/*   Updated: 2025/09/26 16:57:33 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#ifndef PARSING_H
+# define PARSING_H
 
-int main(int ac, char **av){
-	t_sys *sys;
+# include "cub3d.h"
 
-	if (ac != 2)
-		return ((void)e_printf("%s%s\n", DEF_ERR, ARG_ERR), 1);
-	sys = malloc(sizeof(t_sys));
-	if (check_args(av[1], sys))
-		return (1);
+typedef struct s_gnl t_gnl;
 
-	gc_carbonize(&sys->gc);
-	return 0;
-}
+typedef struct s_gnl
+{
+	char	*content;
+	t_gnl	*next;
+}	t_gnl;
+
+bool	check_args(char *av, t_sys *sys);
+char	*gc_gnl(int fd, t_sys *sys);
+int		count_lines(char *file, t_sys *sys);
+
+#endif

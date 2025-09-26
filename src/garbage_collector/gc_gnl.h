@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   gc_gnl.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/08 21:01:24 by mkettab           #+#    #+#             */
-/*   Updated: 2025/09/26 17:25:58 by mkettab          ###   ########.fr       */
+/*   Created: 2025/09/21 10:25:11 by mkettab           #+#    #+#             */
+/*   Updated: 2025/09/26 17:09:27 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#ifndef GC_GNL_H
+# define GC_GNL_H
 
-int main(int ac, char **av){
-	t_sys *sys;
+# include "../../inc/cub3d.h"
 
-	if (ac != 2)
-		return ((void)e_printf("%s%s\n", DEF_ERR, ARG_ERR), 1);
-	sys = malloc(sizeof(t_sys));
-	if (check_args(av[1], sys))
-		return (1);
+int	gc_readstock(t_gnl **buf, int fd, t_sys *sys);
+void	gc_addstock(char *str, t_gnl **buf, int readed, t_sys *sys);
+void	gc_getlineappart(t_gnl *buf, char **str, t_sys *sys);
+t_gnl	*gnl_getlast(t_gnl *list);
+bool	gc_foundline(t_gnl *list);
+void	gc_linegen(char **str, t_gnl *buf, t_sys *sys);
 
-	gc_carbonize(&sys->gc);
-	return 0;
-}
+#endif

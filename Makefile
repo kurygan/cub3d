@@ -23,16 +23,19 @@ LIBFT_ARCH = $(LIB_PATH)libft/libft.a
 MLX_ARCH = $(LIB_PATH)MLX42/build/libmlx42.a
 
 SRCS = main.c \
-	   parsing/parsing.c
+	   parsing/parsing.c parsing/parsing_utils.c \
+	   $(GC_DIR)gc_free.c $(GC_DIR)gc_gnl_utils.c $(GC_DIR)gc_gnl.c $(GC_DIR)gc_malloc.c $(GC_DIR)gc_utils.c
 
 OBJS = $(SRCS:.c=.o)
-SRCS_DIR = ./src/
-OBJS_DIR = ./.build/
 MLXFOLDER = ./lib/MLX42/
 MLXHEAD = $(MLXFOLDER)include/
 MLXLIB = $(MLXFOLDER)build/libmlx42.a -ldl -lglfw -pthread -lm
 SRCS_PREF = $(addprefix $(SRCS_DIR), $(SRCS))
 OBJS_PREF = $(addprefix $(OBJS_DIR), $(OBJS))
+
+SRCS_DIR = ./src/
+OBJS_DIR = ./.build/
+GC_DIR = ./garbage_collector/
 
 NAME = cub3d
 

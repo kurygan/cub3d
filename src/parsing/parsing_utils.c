@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/08 21:01:24 by mkettab           #+#    #+#             */
-/*   Updated: 2025/09/26 17:25:58 by mkettab          ###   ########.fr       */
+/*   Created: 2025/09/26 16:47:30 by mkettab           #+#    #+#             */
+/*   Updated: 2025/09/26 17:07:54 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
-int main(int ac, char **av){
-	t_sys *sys;
+int	count_lines(char *file, t_sys *sys)
+{
+	char	*line;
+	int		fd;
+	int		count;
 
-	if (ac != 2)
-		return ((void)e_printf("%s%s\n", DEF_ERR, ARG_ERR), 1);
-	sys = malloc(sizeof(t_sys));
-	if (check_args(av[1], sys))
-		return (1);
-
-	gc_carbonize(&sys->gc);
-	return 0;
+	fd = open(file, O_RDONLY, 0777);
+	if (fd == -1)
+		return 0;
+	line = gc_gnl(fd, sys);
+	count = 0;
+	while (line)
+	{
+		count++;
+		gc_free(line, &sys->gc);
+		line = gc_gnl(fd, sys);
+	}
+	return count;
 }

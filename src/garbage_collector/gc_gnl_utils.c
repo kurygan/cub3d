@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   gc_gnl_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/14 19:24:41 by mkettab           #+#    #+#             */
-/*   Updated: 2025/09/22 16:56:18 by mkettab          ###   ########.fr       */
+/*   Created: 2025/09/21 10:21:02 by mkettab           #+#    #+#             */
+/*   Updated: 2025/09/26 17:09:06 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "../../inc/cub3d.h"
 
-t_list	*ft_getlast(t_list *list)
+t_gnl	*gnl_getlast(t_gnl *list)
 {
-	t_list	*last;
+	t_gnl	*last;
 
 	last = list;
 	while (last && last->next)
@@ -22,25 +22,25 @@ t_list	*ft_getlast(t_list *list)
 	return (last);
 }
 
-int	ft_foundline(t_list *list)
+bool	gc_foundline(t_gnl *list)
 {
-	t_list	*current;
+	t_gnl	*current;
 	int		i;
 
 	if (!list)
-		return (1);
-	current = ft_getlast(list);
+		return (false);
+	current = gnl_getlast(list);
 	i = 0;
 	while (current->content[i])
 	{
 		if (current->content[i] == '\n')
-			return (0);
+			return (true);
 		i++;
 	}
-	return (1);
+	return (false);
 }
 
-void	line_gen(char **str, t_list *buf)
+void	gc_linegen(char **str, t_gnl *buf, t_sys *sys)
 {
 	int	i;
 	int	len;
@@ -61,20 +61,5 @@ void	line_gen(char **str, t_list *buf)
 		}
 		buf = buf->next;
 	}
-	*str = malloc(sizeof(char) * (len + 1));
-}
-
-void	lst_free(t_list *lst)
-{
-	t_list	*curr;
-	t_list	*next;
-
-	curr = lst;
-	while (curr)
-	{
-		free(curr->content);
-		next = curr->next;
-		free(curr);
-		curr = next;
-	}
+	*str = gc_malloc(&sys->gc, sizeof(char) * (len + 1), MAP, sys);
 }

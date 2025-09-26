@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:46:35 by mkettab           #+#    #+#             */
-/*   Updated: 2025/09/16 13:59:57 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/09/26 17:28:53 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,26 @@
 # define ARG_ERR "Put Valid Number of Arguments\033[0;0m"
 # define ARG_TYPE_ERR "Put Only .cub files that EXISTS\033[0;0m"
 
-typedef struct _gc gc;
+typedef struct s_gc		t_gc;
+typedef struct s_map	t_map;
+typedef struct s_sys	t_sys;
 
 // STRUCTS
 
-typedef enum {
-	MAP
-}	gc_type;
+typedef struct s_map {
+	char	*north;
+	char	*south;
+	char	*east;
+	char	*west;
+	char	**map;
+}	t_map;
 
-typedef struct _gc {
-	void	*mem;
-	gc_type	type;
-	gc		*next;
-	gc		*last;
-}	gc;
+typedef struct s_sys {
+	t_map	*map;
+	t_gc	*gc;
+}	t_sys;
 
-// FUNCTIONS
-
-bool	check_args(char *av);
+# include "parsing.h"
+# include "garbage.h"
 
 #endif

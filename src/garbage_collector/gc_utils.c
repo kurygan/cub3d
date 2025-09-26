@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   gc_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/08 21:01:24 by mkettab           #+#    #+#             */
-/*   Updated: 2025/09/26 17:25:58 by mkettab          ###   ########.fr       */
+/*   Created: 2025/08/07 23:04:52 by mkettab           #+#    #+#             */
+/*   Updated: 2025/09/20 12:07:44 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../inc/garbage.h"
 
-int main(int ac, char **av){
-	t_sys *sys;
+t_gc	*gc_getlast(t_gc **garbage)
+{
+	t_gc	*temp;
 
-	if (ac != 2)
-		return ((void)e_printf("%s%s\n", DEF_ERR, ARG_ERR), 1);
-	sys = malloc(sizeof(t_sys));
-	if (check_args(av[1], sys))
-		return (1);
-
-	gc_carbonize(&sys->gc);
-	return 0;
+	if (!garbage || !*garbage)
+		return (NULL);
+	temp = *garbage;
+	while (temp->right)
+		temp = temp->right;
+	return (temp);
 }

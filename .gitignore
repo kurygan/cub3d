@@ -58,3 +58,4 @@ dkms.conf
 .build/
 cub3d
 en.subject.pdf
+.vscode/
