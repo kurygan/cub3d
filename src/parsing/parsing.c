@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 23:08:32 by mkettab           #+#    #+#             */
-/*   Updated: 2025/09/26 17:34:07 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/10/05 20:18:37 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,20 @@ bool	check_file(char *av)
 	return false;
 }
 
-void	assign_map(char *file, t_sys *sys)
+bool	assign_map(char *file, t_sys *sys)
 {
-	int	line_count = count_lines(file, sys);
-	printf("%d\n", line_count);
+	sys->map = parse_file(file, sys);
+	if (!sys->map)
+		return false;
+	return true;
 }
 
 bool	check_args(char *av, t_sys *sys)
 {
 	if (check_file(av))
-		return ((void)e_printf("%s\n%s\n", DEF_ERR, ARG_TYPE_ERR), true);
-	assign_map(av, sys);
+		return ((void)e_printf("%s%s\n", DEF_ERR, ARG_TYPE_ERR), true);
+	if (!assign_map(av, sys))
+		return ((void)e_printf("%s%s\n", DEF_ERR, FILE_PARSE_ERR), true);
+	printf("map->north = %s", sys->map->north);
 	return false;
 }

@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   gc_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/20 11:45:33 by mkettab           #+#    #+#             */
-/*   Updated: 2025/10/03 14:47:06 by mkettab          ###   ########.fr       */
+/*   Created: 2025/09/30 11:35:23 by mkettab           #+#    #+#             */
+/*   Updated: 2025/10/02 11:52:35 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "../../inc/cub3d.h"
 
-# include "cub3d.h"
-
-typedef struct s_gnl t_gnl;
-
-typedef struct s_gnl
+char	*gc_strdup(char	*str, t_sys *sys, t_gc_type type)
 {
-	char	*content;
-	t_gnl	*next;
-}	t_gnl;
+	char	*duped;
 
-bool			check_args(char *av, t_sys *sys);
-char			*gc_gnl(int fd, t_sys *sys);
-int				count_lines(char *file, t_sys *sys);
-t_parse_data	*parse_file(char *file, t_sys *sys);
-
-#endif
+	duped = gc_malloc(&sys->gc, sizeof(char) * ft_strlen(str), type, sys);
+	duped = ft_memcpy(duped, str, ft_strlen(str));
+	return (duped);
+}

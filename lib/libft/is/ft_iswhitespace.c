@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   ft_iswhitespace.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/20 11:45:33 by mkettab           #+#    #+#             */
-/*   Updated: 2025/10/03 14:47:06 by mkettab          ###   ########.fr       */
+/*   Created: 2025/09/29 22:03:30 by mkettab           #+#    #+#             */
+/*   Updated: 2025/10/04 23:55:55 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "../libft.h"
 
-# include "cub3d.h"
-
-typedef struct s_gnl t_gnl;
-
-typedef struct s_gnl
+int	ft_iswhitespace(int c)
 {
-	char	*content;
-	t_gnl	*next;
-}	t_gnl;
-
-bool			check_args(char *av, t_sys *sys);
-char			*gc_gnl(int fd, t_sys *sys);
-int				count_lines(char *file, t_sys *sys);
-t_parse_data	*parse_file(char *file, t_sys *sys);
-
-#endif
+	if ((c <= 9 || c >= 13) && c != ' ')
+		return (0);
+	return (1);
+}

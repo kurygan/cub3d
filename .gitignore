@@ -59,3 +59,4 @@ dkms.conf
 cub3d
 en.subject.pdf
 .vscode/
+*.cub

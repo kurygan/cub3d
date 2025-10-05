@@ -14,6 +14,7 @@ LIGHT_BLUE = \033[1;34m
 LIGHT_PURPLE = \033[1;35m
 LIGHT_CYAN = \033[1;36m
 WHITE = \033[1;37m
+RESET = \033[0m
 
 CC = cc
 FLAGS = -Wall -Wextra -Werror
@@ -23,8 +24,8 @@ LIBFT_ARCH = $(LIB_PATH)libft/libft.a
 MLX_ARCH = $(LIB_PATH)MLX42/build/libmlx42.a
 
 SRCS = main.c \
-	   parsing/parsing.c parsing/parsing_utils.c \
-	   $(GC_DIR)gc_free.c $(GC_DIR)gc_gnl_utils.c $(GC_DIR)gc_gnl.c $(GC_DIR)gc_malloc.c $(GC_DIR)gc_utils.c
+	   parsing/parsing.c parsing/parsing_utils.c parsing/file.c \
+	   $(GC_DIR)gc_free.c $(GC_DIR)gc_gnl_utils.c $(GC_DIR)gc_gnl.c $(GC_DIR)gc_malloc.c $(GC_DIR)gc_utils.c $(GC_DIR)gc_split.c $(GC_DIR)gc_strdup.c $(GC_DIR)gc_substr.c
 
 OBJS = $(SRCS:.c=.o)
 MLXFOLDER = ./lib/MLX42/
@@ -52,7 +53,7 @@ $(MLX_ARCH):
 	@mkdir -p $(MLXFOLDER)build
 	@cmake $(MLXFOLDER) -B $(MLXFOLDER)build
 	@make -C $(MLXFOLDER)build -j4
-	@echo "|🛠️|$(GREEN)MLX Compiled"
+	@echo "|🛠️|$(GREEN)MLX Compiled$(RESET)"
 
 $(LIBFT_ARCH):
 	@make -C lib/libft all

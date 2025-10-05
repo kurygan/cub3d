@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tylerlover911 <tylerlover911@student.42    +#+  +:+       +#+        */
+/*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 18:26:01 by mkettab           #+#    #+#             */
-/*   Updated: 2025/03/20 01:13:43 by tylerlover9      ###   ########.fr       */
+/*   Updated: 2025/10/03 13:32:12 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 #include <stdio.h>
 
-static int	ft_count_words(char const *s, char c)
+int	ft_count_words(char const *s, char c)
 {
 	int	counts;
 	int	i;
