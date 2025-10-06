@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 11:46:41 by mkettab           #+#    #+#             */
-/*   Updated: 2025/10/03 14:57:41 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/10/05 20:32:23 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ char	**gc_split(char const *s, char c, t_sys *sys, t_gc_type type)
 	i = 0;
 	j = 0;
 	sys->temp_type = type;
-	splitted = gc_malloc(&sys->gc, sizeof(char *) * (ft_count_words(s, c) + 1), type, sys);
+	splitted = gc_malloc(&sys->gc, sizeof(char *) * \
+		(ft_count_words(s, c) + 1), type, sys);
 	start = 0;
 	while (j < ft_count_words(s, c))
 	{

@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 10:19:29 by mkettab           #+#    #+#             */
-/*   Updated: 2025/09/26 17:22:29 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/10/05 20:32:51 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	gc_addstock(char *str, t_gnl **buf, int readed, t_sys *sys)
 
 	new = gc_malloc(&sys->gc, sizeof(t_gnl), BUFFER, sys);
 	new->next = NULL;
-	new->content = gc_malloc(&sys->gc, sizeof(char) * (readed + 1), BUFFER, sys);
+	new->content = gc_malloc(&sys->gc, sizeof(char) * (readed + 1), \
+		BUFFER, sys);
 	i = 0;
 	while (str[i] && i < readed)
 	{

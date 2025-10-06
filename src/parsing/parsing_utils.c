@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 16:47:30 by mkettab           #+#    #+#             */
-/*   Updated: 2025/09/26 17:07:54 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/10/05 20:30:48 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	count_lines(char *file, t_sys *sys)
 
 	fd = open(file, O_RDONLY, 0777);
 	if (fd == -1)
-		return 0;
+		return (0);
 	line = gc_gnl(fd, sys);
 	count = 0;
 	while (line)
@@ -29,5 +29,5 @@ int	count_lines(char *file, t_sys *sys)
 		gc_free(line, &sys->gc);
 		line = gc_gnl(fd, sys);
 	}
-	return count;
+	return (count);
 }

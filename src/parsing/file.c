@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 17:43:24 by mkettab           #+#    #+#             */
-/*   Updated: 2025/10/05 20:17:12 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/10/05 20:41:31y mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	verif_text(char *line, bool *filled_info, t_parse_data *map, t_sys *sys)
 	}
 }
 
-void	verif_color(char *line, bool *filled_info, t_parse_data *map, t_sys *sys)
+void	verif_color(char *line, bool *filled_info, t_parse_data *map, \
+	t_sys *sys)
 {
 	if (!ft_strncmp(line, "F ", 2))
 	{
@@ -50,7 +51,7 @@ void	verif_color(char *line, bool *filled_info, t_parse_data *map, t_sys *sys)
 	}
 }
 
-void	verif_whitespace_line(char *line, bool *filled_info)
+bool	verif_whitespace_line(char *line)
 {
 	int	i;
 
@@ -58,35 +59,45 @@ void	verif_whitespace_line(char *line, bool *filled_info)
 	while (line[i])
 	{
 		if (!ft_iswhitespace(line[i]))
-			break;
+			break ;
 		i++;
 	}
 	if (!line[i])
-		*filled_info = true;
+		return (true);
+	return (false);
 }
 
-t_parse_data	*parse_file(char *file, t_sys *sys)
+bool	parse_complete(t_parse_data *map)
+{
+	if (map->north && map->west && map->south && map->east && map->floor && \
+		map->cieling)
+		return (true);
+	return (false);
+}
+
+t_parse_data	*parse_file(int fd, t_sys *sys)
 {
 	t_parse_data	*map;
-	int				fd;
 	char			*line;
 	bool			filled_info;
 
-	map = gc_malloc(&sys->gc, sizeof(t_parse_data), MAP, sys);
-	fd = open(file, O_RDONLY, 0777);
+	map = gc_calloc(sys, sizeof(t_parse_data), MAP);
 	line = gc_gnl(fd, sys);
 	while (line)
 	{
 		filled_info = false;
-		verif_text(line, &filled_info, map, sys);
-		if (!filled_info)
+		if (!parse_complete(map))
+			verif_text(line, &filled_info, map, sys);
+		if (!filled_info && !parse_complete(map))
 			verif_color(line, &filled_info, map, sys);
 		if (!filled_info)
-			verif_whitespace_line(line, &filled_info);
-		if (!filled_info)
+			filled_info = verif_whitespace_line(line);
+		if (!filled_info && !parse_complete(map))
 			return (NULL);
+		else if (!filled_info)
+			return (map);
 		gc_free(line, &sys->gc);
 		line = gc_gnl(fd, sys);
 	}
-	return map;
+	return (NULL);
 }
