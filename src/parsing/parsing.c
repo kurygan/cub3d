@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 23:08:32 by mkettab           #+#    #+#             */
-/*   Updated: 2025/10/06 16:07:23 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/10/06 16:22:40 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ bool	assign_map(char *file, t_sys *sys)
 	sys->map = parse_file(fd, sys);
 	if (!sys->map)
 		return (false);
-	parse_map(fd, sys);
+	if (!parse_map(fd, sys))
+		return (false);
 	return (true);
 }
 
