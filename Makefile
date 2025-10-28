@@ -24,7 +24,7 @@ LIBFT_ARCH = $(LIB_PATH)libft/libft.a
 MLX_ARCH = $(LIB_PATH)MLX42/build/libmlx42.a
 
 SRCS = main.c array.c \
-	   parsing/parsing.c parsing/parsing_utils.c parsing/file.c parsing/map.c \
+	   parsing/parsing.c parsing/map_utils.c parsing/file.c parsing/map.c \
 	   $(GC_DIR)gc_free.c $(GC_DIR)gc_gnl_utils.c $(GC_DIR)gc_gnl.c $(GC_DIR)gc_malloc.c $(GC_DIR)gc_utils.c $(GC_DIR)gc_split.c $(GC_DIR)gc_strdup.c $(GC_DIR)gc_substr.c
 
 OBJS = $(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 23:08:32 by mkettab           #+#    #+#             */
-/*   Updated: 2025/10/28 23:17:13 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/10/28 23:50:16 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ bool	assign_map(char *file, t_sys *sys)
 	skip_data(fd_map, sys);
 	if (!parse_map(fd_map, fd_data, sys))
 		return (false);
-	printf("First line of map: %s\n", *(char **)sys->data->map);
 	return (true);
 }
 

@@ -89,9 +89,11 @@ typedef struct s_sys
 
 bool			check_args(char *av, t_sys *sys);
 char			*gc_gnl(int fd, t_sys *sys);
-int				count_lines(char *file, t_sys *sys);
+size_t			count_lines(int fd, t_sys *sys, bool *error);
 t_parse_data	*parse_file(int fd, t_sys *sys);
 bool			parse_map(int fd_map, int fd_data, t_sys *sys);
+bool			line_skip(char *line);
+void			skip_data(int fd, t_sys *sys);
 
 // GARBAGE
 
