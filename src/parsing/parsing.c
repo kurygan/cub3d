@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 23:08:32 by mkettab           #+#    #+#             */
-/*   Updated: 2025/10/06 16:22:40 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/10/28 23:17:13 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,18 @@ bool	check_file(char *av)
 
 bool	assign_map(char *file, t_sys *sys)
 {
-	int	fd;
+	int	fd_data;
+	int	fd_map;
 
-	fd = open(file, O_RDONLY, 0777);
-	sys->map = parse_file(fd, sys);
-	if (!sys->map)
+	fd_data = open(file, O_RDONLY, 0777);
+	fd_map = open(file, O_RDONLY, 0777);
+	sys->data = parse_file(fd_data, sys);
+	if (!sys->data)
 		return (false);
-	if (!parse_map(fd, sys))
+	skip_data(fd_map, sys);
+	if (!parse_map(fd_map, fd_data, sys))
 		return (false);
+	printf("First line of map: %s\n", *(char **)sys->data->map);
 	return (true);
 }
 
@@ -45,6 +49,6 @@ bool	check_args(char *av, t_sys *sys)
 		return ((void)e_printf("%s%s\n", DEF_ERR, ARG_TYPE_ERR), true);
 	if (!assign_map(av, sys))
 		return ((void)e_printf("%s%s\n", DEF_ERR, FILE_PARSE_ERR), true);
-	printf("map->north = %s", sys->map->north);
+	printf("map->north = %s", sys->data->north);
 	return (false);
 }

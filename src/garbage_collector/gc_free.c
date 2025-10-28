@@ -6,11 +6,11 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 23:21:26 by mkettab           #+#    #+#             */
-/*   Updated: 2025/09/26 17:08:18 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/10/28 22:12:05 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/garbage.h"
+#include "../../inc/cub3d.h"
 
 void	gc_free(void *mem, t_gc **garbage)
 {

@@ -6,11 +6,11 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 00:47:29 by mkettab           #+#    #+#             */
-/*   Updated: 2025/10/03 14:53:26 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/10/28 22:11:43 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/garbage.h"
+#include "../../inc/cub3d.h"
 
 char	*gc_substr(char const *s, unsigned int start, size_t len,
 		t_sys *sys)

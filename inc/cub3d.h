@@ -6,12 +6,14 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:46:35 by mkettab           #+#    #+#             */
-/*   Updated: 2025/10/06 16:16:21 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/10/21 21:57:43y mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+/***********************************INCLUDES***********************************/
 
 # include <stdio.h>
 # include <stdbool.h>
@@ -21,7 +23,7 @@
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include "../lib/libft/libft.h"
 
-// DEF
+/************************************DEFINE************************************/
 
 # define DEF_ERR "Error\n\033[1;31m"
 # define ARG_ERR "Put Valid Number of Arguments.\033[0m"
@@ -33,8 +35,15 @@ typedef struct s_parse_data	t_parse_data;
 typedef struct s_sys		t_sys;
 typedef struct s_gnl		t_gnl;
 typedef enum e_gc_type		t_gc_type;
+typedef struct s_array		t_array;
 
-// STRUCTS
+/***********************************STRUCTS************************************/
+
+typedef enum e_gc_type
+{
+	MAP,
+	BUFFER
+}	t_gc_type;
 
 typedef struct s_gc
 {
@@ -51,12 +60,6 @@ typedef struct s_gnl
 	t_gnl	*next;
 }	t_gnl;
 
-typedef enum e_gc_type
-{
-	MAP,
-	BUFFER
-}	t_gc_type;
-
 typedef struct s_parse_data
 {
 	char	*north;
@@ -65,20 +68,32 @@ typedef struct s_parse_data
 	char	*west;
 	char	**floor;
 	char	**cieling;
-	char	**map;
 }	t_parse_data;
+
+typedef struct s_map_data
+{
+	char	**map;
+}	t_map_data;
 
 typedef struct s_sys
 {
-	t_parse_data	*map;
+	t_parse_data	*data;
+	t_map_data		*map;
 	t_gc			*gc;
 	t_gc_type		temp_type;
 }	t_sys;
+
+/***********************************COMMANDS***********************************/
+
+// PARSING
 
 bool			check_args(char *av, t_sys *sys);
 char			*gc_gnl(int fd, t_sys *sys);
 int				count_lines(char *file, t_sys *sys);
 t_parse_data	*parse_file(int fd, t_sys *sys);
+bool			parse_map(int fd_map, int fd_data, t_sys *sys);
+
+// GARBAGE
 
 t_gc			*gc_getlast(t_gc **garbage);
 void			gc_free(void *mem, t_gc **garbage);
@@ -91,5 +106,11 @@ char			*gc_strdup(char	*str, t_sys *sys, t_gc_type type);
 char			*gc_substr(char const *s, unsigned int start, size_t len,
 					t_sys *sys);
 char			**gc_split(char const *s, char c, t_sys *sys, t_gc_type type);
+
+// ARRAY
+
+t_array			*array_init(t_sys *sys, t_gc_type type, size_t size);
+void			array_append(t_sys *sys, t_gc_type type, t_array *array, \
+					void *new_item);
 
 #endif

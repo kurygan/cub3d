@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:08:04 by mkettab           #+#    #+#             */
-/*   Updated: 2025/10/03 13:35:50 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/10/16 23:08:38 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@
 # include <sys/uio.h>
 # include <unistd.h>
 # include <stdbool.h>
+
+typedef struct s_list
+{
+	char			*content;
+	struct s_list	*next;
+}	t_list;
 
 size_t	ft_strlen(const char *s);
 int		ft_isalpha(int c);
@@ -70,14 +76,6 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strrcmp(const char *s1, const char *s2);
 void	ft_freetab(char **str);
-
-// Bonus Part
-
-typedef struct s_list
-{
-	char			*content;
-	struct s_list	*next;
-}	t_list;
 
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);

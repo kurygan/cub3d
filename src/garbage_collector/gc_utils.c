@@ -6,11 +6,11 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 23:04:52 by mkettab           #+#    #+#             */
-/*   Updated: 2025/09/20 12:07:44 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/10/28 22:12:05 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/garbage.h"
+#include "../../inc/cub3d.h"
 
 t_gc	*gc_getlast(t_gc **garbage)
 {
