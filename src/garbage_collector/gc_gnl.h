@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 10:25:11 by mkettab           #+#    #+#             */
-/*   Updated: 2025/10/05 20:32:41 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/04 19:04:12 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "../../inc/cub3d.h"
 
-int		gc_readstock(t_gnl **buf, int fd, t_sys *sys);
-void	gc_addstock(char *str, t_gnl **buf, int readed, t_sys *sys);
+int		gc_readstock(t_gnl **buf, int fd, t_sys *sys, int *readed);
+void	gc_addstock(char *str, t_gnl **buf, t_sys *sys);
 void	gc_getlineappart(t_gnl *buf, char **str, t_sys *sys);
 t_gnl	*gnl_getlast(t_gnl *list);
 bool	gc_foundline(t_gnl *list);

@@ -70,12 +70,12 @@ t_parse_data	*parse_file(int fd, t_sys *sys)
 	while (line)
 	{
 		filled_info = false;
-		if (!parse_complete(map))
+		if (!line[0])
+			filled_info = true;
+		if (!filled_info && !parse_complete(map))
 			verif_text(line, &filled_info, map, sys);
 		if (!filled_info && !parse_complete(map))
 			verif_color(line, &filled_info, map, sys);
-		if (!filled_info && !line[0])
-			filled_info = true;
 		if (!filled_info && !parse_complete(map))
 			return (NULL);
 		else if (!filled_info)

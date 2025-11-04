@@ -17,13 +17,13 @@ WHITE = \033[1;37m
 RESET = \033[0m
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g3
 
 LIB_PATH = ./lib/
 LIBFT_ARCH = $(LIB_PATH)libft/libft.a
 MLX_ARCH = $(LIB_PATH)MLX42/build/libmlx42.a
 
-SRCS = main.c array.c \
+SRCS = main.c \
 	   parsing/parsing.c parsing/map_utils.c parsing/file.c parsing/map.c \
 	   $(GC_DIR)gc_free.c $(GC_DIR)gc_gnl_utils.c $(GC_DIR)gc_gnl.c $(GC_DIR)gc_malloc.c $(GC_DIR)gc_utils.c $(GC_DIR)gc_split.c $(GC_DIR)gc_strdup.c $(GC_DIR)gc_substr.c
 

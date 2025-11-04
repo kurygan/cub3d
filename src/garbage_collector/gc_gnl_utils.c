@@ -6,11 +6,11 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 10:21:02 by mkettab           #+#    #+#             */
-/*   Updated: 2025/09/26 17:09:06 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/04 19:02:01 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "gc_gnl.h"
 
 t_gnl	*gnl_getlast(t_gnl *list)
 {
@@ -18,47 +18,37 @@ t_gnl	*gnl_getlast(t_gnl *list)
 
 	last = list;
 	while (last && last->next)
+	{
 		last = last->next;
+	}
 	return (last);
 }
 
 bool	gc_foundline(t_gnl *list)
 {
 	t_gnl	*current;
-	int		i;
 
 	if (!list)
 		return (false);
 	current = gnl_getlast(list);
-	i = 0;
-	while (current->content[i])
-	{
-		if (current->content[i] == '\n')
-			return (true);
-		i++;
-	}
+	if (current->content[0] == '\n')
+		return (true);
 	return (false);
 }
 
 void	gc_linegen(char **str, t_gnl *buf, t_sys *sys)
 {
-	int	i;
 	int	len;
 
 	len = 0;
-	while (buf)
+	while (buf && buf->content[0])
 	{
-		i = 0;
-		while (buf->content[i])
+		if (buf->content[0] == '\n')
 		{
-			if (buf->content[i] == '\n')
-			{
-				len++;
-				break ;
-			}
 			len++;
-			i++;
+			break ;
 		}
+		len++;
 		buf = buf->next;
 	}
 	*str = gc_malloc(&sys->gc, sizeof(char) * (len + 1), MAP, sys);

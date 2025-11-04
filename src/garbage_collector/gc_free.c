@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 23:21:26 by mkettab           #+#    #+#             */
-/*   Updated: 2025/10/28 22:12:05 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/04 19:00:11 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ void	gc_carbonize_type(t_gc **garbage, t_gc_type type)
 	while (temp)
 	{
 		if (temp->type == type)
-			gc_free(temp->mem, garbage);
+		{
+			free(temp->mem);
+			temp->mem = NULL;
+		}
 		temp = temp->right;
 	}
 }
