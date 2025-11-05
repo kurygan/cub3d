@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/08 16:46:35 by mkettab           #+#    #+#             */
-/*   Updated: 2025/10/21 21:57:43y mkettab          ###   ########.fr       */
+/*   Created: 2025/11/05 03:54:28 by mkettab           #+#    #+#             */
+/*   Updated: 2025/11/05 22:30:15 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_parse_data
 	char	*west;
 	char	**floor;
 	char	**cieling;
+	size_t	map_size;
 }	t_parse_data;
 
 typedef struct s_map_data
@@ -94,6 +95,9 @@ t_parse_data	*parse_file(int fd, t_sys *sys);
 bool			parse_map(int fd_map, int fd_data, t_sys *sys);
 bool			line_skip(char *line);
 char			*skip_data(int fd, t_sys *sys);
+bool			assign_map(int fd, t_sys *sys);
+char			*skip_empty(int fd, t_sys *sys);
+bool			line_verif(char *line, size_t y, t_sys *sys);
 
 // GARBAGE
 
@@ -108,11 +112,5 @@ char			*gc_strdup(char	*str, t_sys *sys, t_gc_type type);
 char			*gc_substr(char const *s, unsigned int start, size_t len,
 					t_sys *sys);
 char			**gc_split(char const *s, char c, t_sys *sys, t_gc_type type);
-
-// ARRAY
-
-t_array			*array_init(t_sys *sys, t_gc_type type, size_t size);
-void			array_append(t_sys *sys, t_gc_type type, t_array *array, \
-					void *new_item);
 
 #endif

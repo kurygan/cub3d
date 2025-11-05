@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 23:42:00 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/05 01:29:00 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/05 02:58:53 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,16 @@ size_t	count_lines(int fd, t_sys *sys)
 		count++;
 	}
 	return (count);
+}
+
+char	*skip_empty(int fd, t_sys *sys)
+{
+	char	*line;
+	line = gc_gnl(fd, sys);
+	while (!*line)
+	{
+		gc_free(line, &sys->gc);
+		line = gc_gnl(fd, sys);
+	}
+	return (line);
 }
