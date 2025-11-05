@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 23:42:00 by mkettab           #+#    #+#             */
-/*   Updated: 2025/10/30 02:52:32 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/05 01:29:00 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,43 +21,44 @@ bool	line_skip(char *line)
 	return (false);
 }
 
+bool	verif_char(char c, t_sys *sys)
+{
+	int		j;
+	bool	error;
+	char	*valid_char;
+
+	valid_char = gc_strdup("NSEW10 ", sys, MAP);
+	error = true;
+	j = 0;
+	while (valid_char[j])
+	{
+		if (c == valid_char[j])
+			error = false;
+		j++;
+	}
+	gc_free(valid_char, &sys->gc);
+	return (error);
+}
+
 size_t	count_lines(int fd, t_sys *sys)
 {
 	char	*line;
-	char	*valid_char;
 	int		i;
-	int		j;
 	size_t	count;
-	bool	error;
 
-	valid_char = gc_strdup("10NWSE ", sys, MAP);
-	//printf("%s$\n", valid_char);
-	line = gc_gnl(fd, sys);
-	printf("%s\n", line);
+	line = skip_data(fd, sys);
 	count = 0;
 	while (line)
 	{
 		i = 0;
 		while (line[i])
 		{
-			error = true;
-			j = 0;
-			while (valid_char[j])
-			{
-				if (line[i] == valid_char[j])
-				{
-					printf("Valid Character Found: %c!\n", line[i]);
-					error = false;
-				}
-				j++;
-			}
-			if (error)
+			if (verif_char(line[i], sys))
 				return (0);
 			i++;
 		}
 		gc_free(line, &sys->gc);
 		line = gc_gnl(fd, sys);
-		printf("%s\n", line);
 		count++;
 	}
 	return (count);

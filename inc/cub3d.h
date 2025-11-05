@@ -93,7 +93,7 @@ size_t			count_lines(int fd, t_sys *sys);
 t_parse_data	*parse_file(int fd, t_sys *sys);
 bool			parse_map(int fd_map, int fd_data, t_sys *sys);
 bool			line_skip(char *line);
-void			skip_data(int fd, t_sys *sys);
+char			*skip_data(int fd, t_sys *sys);
 
 // GARBAGE
 

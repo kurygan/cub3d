@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:20:29 by mkettab           #+#    #+#             */
-/*   Updated: 2025/10/30 02:51:54 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/05 02:47:22 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,22 @@ bool	parse_map(int fd_map, int fd_data, t_sys *sys)
 	printf("Map lenght: %zu\n", loc_num);
 	if (!loc_num)
 		return (false);
+	sys->map->map = (char *)gc_malloc(&sys->gc, sizeof(char *) * loc_num, MAP, sys);
+	if (!assign_map(fd_data, sys))
+		return (false);
 	return (true);
 }
 
-void	skip_data(int fd, t_sys *sys)
+char	*skip_data(int fd, t_sys *sys)
 {
 	char	*line;
 
 	line = gc_gnl(fd, sys);
 	while (line_skip(line))
 	{
-		printf("%s\n", line);
+		//printf("%s\n", line);
 		gc_free(line, &sys->gc);
 		line = gc_gnl(fd, sys);
 	}
+	return (line);
 }

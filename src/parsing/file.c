@@ -66,9 +66,11 @@ t_parse_data	*parse_file(int fd, t_sys *sys)
 	bool			filled_info;
 
 	map = gc_calloc(sys, sizeof(t_parse_data), MAP);
-	line = gc_gnl(fd, sys);
+	line = gc_malloc(&sys->gc, 1, MAP, sys);
 	while (line)
 	{
+		gc_free(line, &sys->gc);
+		line = gc_gnl(fd, sys);
 		filled_info = false;
 		if (!line[0])
 			filled_info = true;
@@ -78,10 +80,8 @@ t_parse_data	*parse_file(int fd, t_sys *sys)
 			verif_color(line, &filled_info, map, sys);
 		if (!filled_info && !parse_complete(map))
 			return (NULL);
-		else if (!filled_info)
+		if (parse_complete(map))
 			return (map);
-		gc_free(line, &sys->gc);
-		line = gc_gnl(fd, sys);
 	}
 	return (NULL);
 }

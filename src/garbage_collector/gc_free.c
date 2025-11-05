@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 23:21:26 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/04 19:00:11 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/05 01:34:01 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	gc_free(void *mem, t_gc **garbage)
 			break ;
 		temp = temp->right;
 	}
-	free(mem);
+	if (mem)
+		free(mem);
 	if (temp)
 		temp->mem = NULL;
 }
