@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:20:29 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/05 22:50:11 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/06 20:20:28 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,11 @@ bool	assign_map(int fd, t_sys *sys)
 		line = gc_gnl(fd, sys);
 		y++;
 	}
-	size_t y2 = 0;
-	char **map = sys->map->map;
-	while (y2 < sys->data->map_size){
-		printf("%s\n", map[y2]);
-		y2++;
-	}
+	if (!check_players(sys))
+		return (false);
 	/*
-	*	Verif Multiple Players
-	*	Floodfill for everything Accessible
+	*	V | Verif Multiple Players
+	*	X | Floodfill for everything Accessible
 	*/
 	return (true);
 }
@@ -67,8 +63,9 @@ bool	parse_map(int fd_map, int fd_data, t_sys *sys)
 	printf("Map lenght: %zu\n", map_size);
 	if (!map_size)
 		return (false);
-	sys->map = gc_malloc(&sys->gc, sizeof(t_map_data), MAP, sys);
-	sys->map->map = (char **)gc_malloc(&sys->gc, sizeof(char *) * map_size, MAP, sys);
+	sys->map = gc_malloc(&sys->gc, sizeof(t_map_data), PARSING, sys);
+	sys->map->player = NULL;
+	sys->map->map = (char **)gc_malloc(&sys->gc, sizeof(char *) * map_size, PARSING, sys);
 	sys->data->map_size = map_size;
 	if (!assign_map(fd_data, sys))
 		return (false);
@@ -87,4 +84,22 @@ char	*skip_data(int fd, t_sys *sys)
 		line = gc_gnl(fd, sys);
 	}
 	return (line);
+}
+
+void	player_init(t_sys *sys, int x, int y, char card)
+{
+	t_player	*player;
+
+	player = gc_calloc(sys, sizeof(t_player), PARSING);
+	player->x = x;
+	player->y = y;
+	if (card == 'N')
+		player->or = NORTH;
+	if (card == 'S')
+		player->or = SOUTH;
+	if (card == 'W')
+		player->or = WEST;
+	if (card == 'S')
+		player->or = EAST;
+	sys->map->player = player;
 }

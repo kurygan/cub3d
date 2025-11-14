@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 23:42:00 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/05 02:58:53 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/06 19:40:28 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	verif_char(char c, t_sys *sys)
 	bool	error;
 	char	*valid_char;
 
-	valid_char = gc_strdup("NSEW10 ", sys, MAP);
+	valid_char = gc_strdup("NSEW10 ", sys, PARSING);
 	error = true;
 	j = 0;
 	while (valid_char[j])
@@ -74,4 +74,32 @@ char	*skip_empty(int fd, t_sys *sys)
 		line = gc_gnl(fd, sys);
 	}
 	return (line);
+}
+
+bool	check_players(t_sys *sys)
+{
+	int		x;
+	int		y;
+	bool	player_found;
+
+	y = 0;
+	player_found = false;
+	while (y < (int)sys->data->map_size)
+	{
+		x = 0;
+		while (sys->map->map[y][x])
+		{
+			if (sys->map->map[y][x] == 'N' || sys->map->map[y][x] == 'S' || \
+				sys->map->map[y][x] == 'E' || sys->map->map[y][x] == 'W')
+			{
+				if (player_found)
+					return (false);
+				player_found = true;
+				player_init(sys, x, y, sys->map->map[y][x]);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (player_found);
 }

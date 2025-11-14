@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 23:08:32 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/05 03:01:18 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/06 01:09:10 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,5 @@ bool	check_args(char *av, t_sys *sys)
 		return ((void)e_printf("%s%s\n", DEF_ERR, ARG_TYPE_ERR), true);
 	if (!parse_data(av, sys))
 		return ((void)e_printf("%s%s\n", DEF_ERR, FILE_PARSE_ERR), true);
-	printf("map->north = %s", sys->data->north);
 	return (false);
 }

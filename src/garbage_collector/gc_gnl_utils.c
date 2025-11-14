@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 10:21:02 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/05 01:16:21 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/06 19:39:57 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ void	gc_linegen(char **str, t_gnl *buf, t_sys *sys)
 		}
 		buf = buf->next;
 	}
-	*str = gc_malloc(&sys->gc, sizeof(char) * (len + 1), MAP, sys);
+	*str = gc_malloc(&sys->gc, sizeof(char) * (len + 1), PARSING, sys);
 	(*str)[0] = 0;
 }

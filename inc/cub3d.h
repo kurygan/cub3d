@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 03:54:28 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/05 22:30:15 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/06 19:43:18 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,26 @@ typedef struct s_gc			t_gc;
 typedef struct s_parse_data	t_parse_data;
 typedef struct s_sys		t_sys;
 typedef struct s_gnl		t_gnl;
-typedef enum e_gc_type		t_gc_type;
 typedef struct s_array		t_array;
+typedef struct s_player		t_player;
+typedef enum e_gc_type		t_gc_type;
+typedef enum e_orientation	t_card;
 
 /***********************************STRUCTS************************************/
 
 typedef enum e_gc_type
 {
-	MAP,
+	PARSING,
 	BUFFER
 }	t_gc_type;
+
+typedef enum e_orientation
+{
+	NORTH,
+	EAST,
+	SOUTH,
+	WEST
+}	t_card;
 
 typedef struct s_gc
 {
@@ -73,8 +83,16 @@ typedef struct s_parse_data
 
 typedef struct s_map_data
 {
-	char	**map;
+	char		**map;
+	t_player	*player;
 }	t_map_data;
+
+typedef struct s_player
+{
+	int		x;
+	int		y;
+	t_card	or;
+}	t_player;
 
 typedef struct s_sys
 {
@@ -98,6 +116,8 @@ char			*skip_data(int fd, t_sys *sys);
 bool			assign_map(int fd, t_sys *sys);
 char			*skip_empty(int fd, t_sys *sys);
 bool			line_verif(char *line, size_t y, t_sys *sys);
+bool			check_players(t_sys *sys);
+void			player_init(t_sys *sys, int x, int y, char card);
 
 // GARBAGE
 

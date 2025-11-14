@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 03:56:41 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/05 22:38:39 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/06 17:32:47 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ bool	check_walls(char *line, t_sys *sys, size_t y)
 
 bool	line_verif(char *line, size_t y, t_sys *sys)
 {
-	if (y == 0 || y == sys->data->map_size - 1)
+	if (y == 0)
 		return (firstlast_lane(line));
 	else
 		return (check_walls(line, sys, y));

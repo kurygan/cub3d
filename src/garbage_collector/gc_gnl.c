@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 10:19:29 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/05 01:29:15 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/06 19:39:59 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*gc_gnl(int fd, t_sys *sys)
 	gc_getlineappart(buf, &fin_line, sys);
 	gc_carbonize_type(&sys->gc, BUFFER);
 	if (fin_line[0] == 17)
-		return (buf = NULL, gc_strdup("", sys, MAP));
+		return (buf = NULL, gc_strdup("", sys, PARSING));
 	if (!(fin_line[0]))
 	{
 		buf = NULL;

@@ -16,22 +16,22 @@ void	verif_text(char *line, bool *filled_info, t_parse_data *map, t_sys *sys)
 {
 	if (!ft_strncmp(line, "NO ", 3))
 	{
-		map->north = gc_strdup(line + 3, sys, MAP);
+		map->north = gc_strdup(line + 3, sys, PARSING);
 		*filled_info = true;
 	}
 	else if (!ft_strncmp(line, "SO ", 3))
 	{
-		map->south = gc_strdup(line + 3, sys, MAP);
+		map->south = gc_strdup(line + 3, sys, PARSING);
 		*filled_info = true;
 	}
 	else if (!ft_strncmp(line, "WE ", 3))
 	{
-		map->west = gc_strdup(line + 3, sys, MAP);
+		map->west = gc_strdup(line + 3, sys, PARSING);
 		*filled_info = true;
 	}
 	else if (!ft_strncmp(line, "EA ", 3))
 	{
-		map->east = gc_strdup(line + 3, sys, MAP);
+		map->east = gc_strdup(line + 3, sys, PARSING);
 		*filled_info = true;
 	}
 }
@@ -41,12 +41,12 @@ void	verif_color(char *line, bool *filled_info, t_parse_data *map, \
 {
 	if (!ft_strncmp(line, "F ", 2))
 	{
-		map->floor = gc_split(line + 2, ',', sys, MAP);
+		map->floor = gc_split(line + 2, ',', sys, PARSING);
 		*filled_info = true;
 	}
 	if (!ft_strncmp(line, "C ", 2))
 	{
-		map->cieling = gc_split(line + 2, ',', sys, MAP);
+		map->cieling = gc_split(line + 2, ',', sys, PARSING);
 		*filled_info = true;
 	}
 }
@@ -65,8 +65,8 @@ t_parse_data	*parse_file(int fd, t_sys *sys)
 	char			*line;
 	bool			filled_info;
 
-	map = gc_calloc(sys, sizeof(t_parse_data), MAP);
-	line = gc_malloc(&sys->gc, 1, MAP, sys);
+	map = gc_calloc(sys, sizeof(t_parse_data), PARSING);
+	line = gc_malloc(&sys->gc, 1, PARSING, sys);
 	while (line)
 	{
 		gc_free(line, &sys->gc);
