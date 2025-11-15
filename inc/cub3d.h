@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 03:54:28 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/06 19:43:18 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/15 04:34:37 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ char			*skip_empty(int fd, t_sys *sys);
 bool			line_verif(char *line, size_t y, t_sys *sys);
 bool			check_players(t_sys *sys);
 void			player_init(t_sys *sys, int x, int y, char card);
+char			**map_copy(char **src, t_sys *sys);
 
 // GARBAGE
 
