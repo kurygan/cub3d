@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:20:29 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/14 21:53:04 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/21 21:13:04 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,6 @@ bool	assign_map(int fd, t_sys *sys)
 	}
 	if (!check_players(sys))
 		return (false);
-	if (!floodfill(sys))
-	/*
-	*	V | Verif Multiple Players
-	*	X | Floodfill for everything Accessible
-	*/
 	return (true);
 }
 
@@ -80,7 +75,6 @@ char	*skip_data(int fd, t_sys *sys)
 	line = gc_gnl(fd, sys);
 	while (line_skip(line))
 	{
-		//printf("%s\n", line);
 		gc_free(line, &sys->gc);
 		line = gc_gnl(fd, sys);
 	}

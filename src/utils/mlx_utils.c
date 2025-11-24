@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   valid_path.c                                       :+:      :+:    :+:   */
+/*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/06 20:21:36 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/15 04:35:00 by mkettab          ###   ########.fr       */
+/*   Created: 2025/11/24 01:01:15 by mkettab           #+#    #+#             */
+/*   Updated: 2025/11/24 01:52:06 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-bool	floodfill(t_sys *sys)
+uint32_t	rgb_converter(char	**rgb)
 {
-	char		**map;
-	t_player	*player;
+	int32_t	r;
+	int32_t	g;
+	int32_t	b;
+	int32_t	a;
 
-	map = map_copy(sys->map->map, sys);
-	player = sys->map->player;
+	if (!rgb[2])
+		return (0);
+	a = 255;
+	r = ft_atoi(rgb[0]);
+	g = ft_atoi(rgb[1]);
+	b = ft_atoi(rgb[2]);
+	if (r == -1 || g == -1 || b == -1)
+		return (0);
+	return (a << 24 | b << 16 | g << 8 | r);
 }

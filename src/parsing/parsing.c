@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 23:08:32 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/06 01:09:10 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/24 01:09:00 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ bool	parse_data(char *file, t_sys *sys)
 	fd_map = open(file, O_RDONLY, 0777);
 	sys->data = parse_file(fd_data, sys);
 	if (!sys->data)
+		return (false);
+	if (!verif_data(sys->data))
 		return (false);
 	if (!parse_map(fd_map, fd_data, sys))
 		return (false);

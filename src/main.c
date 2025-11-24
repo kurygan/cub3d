@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 21:01:24 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/06 19:25:59 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/21 23:22:14 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ int	main(int ac, char **av)
 	ft_memset(sys, 0, sizeof(t_sys));
 	if (check_args(av[1], sys))
 		return (gc_carbonize(&sys->gc), free(sys), 1);
+	if (!lib_init(sys))
+		return (gc_carbonize(&sys->gc), free(sys), 1);
+	mlx_loop(sys->mlx);
 	gc_carbonize(&sys->gc);
 	free(sys);
 	return (0);

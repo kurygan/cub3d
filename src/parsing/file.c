@@ -42,19 +42,25 @@ void	verif_color(char *line, bool *filled_info, t_parse_data *map, \
 	if (!ft_strncmp(line, "F ", 2))
 	{
 		map->floor = gc_split(line + 2, ',', sys, PARSING);
-		*filled_info = true;
+		if (map->floor && map->floor[2] && !map->floor[3])
+			*filled_info = true;
+		else
+			map->floor = NULL;
 	}
 	if (!ft_strncmp(line, "C ", 2))
 	{
-		map->cieling = gc_split(line + 2, ',', sys, PARSING);
-		*filled_info = true;
+		map->ceiling = gc_split(line + 2, ',', sys, PARSING);
+		if (map->ceiling && map->ceiling[2] && !map->ceiling[3])
+			*filled_info = true;
+		else
+			map->ceiling = NULL;
 	}
 }
 
 bool	parse_complete(t_parse_data *map)
 {
 	if (map->north && map->west && map->south && map->east && map->floor && \
-		map->cieling)
+		map->ceiling)
 		return (true);
 	return (false);
 }
@@ -84,4 +90,27 @@ t_parse_data	*parse_file(int fd, t_sys *sys)
 			return (map);
 	}
 	return (NULL);
+}
+
+bool	verif_data(t_parse_data *data)
+{
+	int	fd;
+
+	fd = open(data->north, O_RDONLY, 0777);
+	if (fd == -1)
+		return (false);
+	close(fd);
+	fd = open(data->west, O_RDONLY, 0777);
+	if (fd == -1)
+		return (false);
+	close(fd);
+	fd = open(data->south, O_RDONLY, 0777);
+	if (fd == -1)
+		return (false);
+	close(fd);
+	fd = open(data->east, O_RDONLY, 0777);
+	if (fd == -1)
+		return (false);
+	close(fd);
+	return (true);
 }

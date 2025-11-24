@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 03:54:28 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/15 04:34:37 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/11/24 01:52:27 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define ARG_ERR "Put Valid Number of Arguments.\033[0m"
 # define ARG_TYPE_ERR "Put Only .cub files that EXISTS.\033[0m"
 # define FILE_PARSE_ERR "Put all the informations needed.\033[0m"
+# define INIT_ERR "MiniLibX42 failed to init.\033[0m"
+# define TEXT_ERR "Texture Loading failed.\033[0m"
 
 typedef struct s_gc			t_gc;
 typedef struct s_parse_data	t_parse_data;
@@ -36,6 +38,7 @@ typedef struct s_sys		t_sys;
 typedef struct s_gnl		t_gnl;
 typedef struct s_array		t_array;
 typedef struct s_player		t_player;
+typedef struct s_texture	t_texture;
 typedef enum e_gc_type		t_gc_type;
 typedef enum e_orientation	t_card;
 
@@ -77,14 +80,14 @@ typedef struct s_parse_data
 	char	*east;
 	char	*west;
 	char	**floor;
-	char	**cieling;
+	char	**ceiling;
 	size_t	map_size;
 }	t_parse_data;
 
 typedef struct s_map_data
 {
-	char		**map;
-	t_player	*player;
+	char			**map;
+	t_player		*player;
 }	t_map_data;
 
 typedef struct s_player
@@ -94,12 +97,24 @@ typedef struct s_player
 	t_card	or;
 }	t_player;
 
+typedef struct s_texture
+{
+	mlx_texture_t	*north;
+	mlx_texture_t	*east;
+	mlx_texture_t	*south;
+	mlx_texture_t	*west;
+	uint32_t		floor;
+	uint32_t		ceiling;
+}	t_texture;
+
 typedef struct s_sys
 {
 	t_parse_data	*data;
 	t_map_data		*map;
 	t_gc			*gc;
 	t_gc_type		temp_type;
+	t_texture		*textures;
+	mlx_t			*mlx;
 }	t_sys;
 
 /***********************************COMMANDS***********************************/
@@ -119,6 +134,9 @@ bool			line_verif(char *line, size_t y, t_sys *sys);
 bool			check_players(t_sys *sys);
 void			player_init(t_sys *sys, int x, int y, char card);
 char			**map_copy(char **src, t_sys *sys);
+bool			lib_init(t_sys *sys);
+bool			verif_data(t_parse_data *data);
+uint32_t		rgb_converter(char	**rgb);
 
 // GARBAGE
 
