@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 03:54:28 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/24 01:52:27 by mkettab          ###   ########.fr       */
+/*   Updated: 2026/01/14 20:04:18 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct s_sys
 	t_gc_type		temp_type;
 	t_texture		*textures;
 	mlx_t			*mlx;
+	t_gc			*last;
 }	t_sys;
 
 /***********************************COMMANDS***********************************/
@@ -140,7 +141,6 @@ uint32_t		rgb_converter(char	**rgb);
 
 // GARBAGE
 
-t_gc			*gc_getlast(t_gc **garbage);
 void			gc_free(void *mem, t_gc **garbage);
 void			gc_carbonize(t_gc **garbage);
 void			gc_carbonize_type(t_gc **garbage, t_gc_type type);
