@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 03:54:28 by mkettab           #+#    #+#             */
-/*   Updated: 2026/01/14 22:39:59 by mkettab          ###   ########.fr       */
+/*   Updated: 2026/01/14 23:00:43 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # define INIT_ERR "MiniLibX42 failed to init.\033[0m"
 # define TEXT_ERR "Texture Loading failed.\033[0m"
 
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1920
+# define HEIGHT 1080
 
 typedef struct s_gc			t_gc;
 typedef struct s_parse_data	t_parse_data;
@@ -138,6 +138,7 @@ char			**map_copy(char **src, t_sys *sys);
 bool			lib_init(t_sys *sys);
 bool			verif_data(t_parse_data *data);
 uint32_t		rgb_converter(char	**rgb);
+uint32_t		raw_rgba(uint32_t r, uint32_t g, uint32_t b, uint32_t a);
 void			set_player_dir(t_player *player, char card);
 void			mlx_clear(t_sys *sys);
 
@@ -153,5 +154,10 @@ char			*gc_strdup(char	*str, t_sys *sys, t_gc_type type);
 char			*gc_substr(char const *s, unsigned int start, size_t len,
 					t_sys *sys);
 char			**gc_split(char const *s, char c, t_sys *sys, t_gc_type type);
+
+// DEBUG
+
+void			put_texture_on_img(t_sys *sys, mlx_texture_t *tex, int x_pos, \
+					int y_pos);
 
 #endif

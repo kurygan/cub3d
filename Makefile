@@ -27,7 +27,8 @@ SRCS = main.c \
 	   parsing/parsing.c parsing/file.c parsing/map.c parsing/line_verif.c parsing/player_assignations.c \
 	   $(GC_DIR)free.c $(GC_DIR)gnl_utils.c $(GC_DIR)gnl.c $(GC_DIR)malloc.c $(GC_DIR)split.c $(GC_DIR)strdup.c $(GC_DIR)substr.c \
 	   mlx/init.c mlx/clear.c \
-	   utils/map_utils.c utils/mlx_utils.c
+	   utils/map_utils.c utils/mlx_utils.c \
+	   engine/debug.c
 
 OBJS = $(SRCS:.c=.o)
 MLXFOLDER = ./lib/MLX42/

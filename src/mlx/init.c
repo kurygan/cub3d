@@ -6,25 +6,25 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 23:13:13 by mkettab           #+#    #+#             */
-/*   Updated: 2026/01/14 22:34:33 by mkettab          ###   ########.fr       */
+/*   Updated: 2026/01/14 23:06:43 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-bool	init_img(mlx_t *mlx, mlx_image_t *img)
+bool	init_img(t_sys *sys)
 {
-	img = mlx_new_image(mlx, WIDTH, HEIGHT);
-	if (!img)
+	sys->img = mlx_new_image(sys->mlx, WIDTH, HEIGHT);
+	if (!sys->img)
 		return (false);
-	if (mlx_image_to_window(mlx, img, 0, 0) < 0)
+	if (mlx_image_to_window(sys->mlx, sys->img, 0, 0) < 0)
 		return (false);
 	return (true);
 }
 
 bool	lib_init(t_sys *sys)
 {
-	sys->mlx = mlx_init(800, 600, "Cube en troisieme dimension", false);
+	sys->mlx = mlx_init(WIDTH, HEIGHT, "Cube en troisieme dimension", false);
 	if (!sys->mlx)
 		return ((void)e_printf("%s%s\n", DEF_ERR, INIT_ERR), false);
 	sys->textures = gc_malloc(&sys->gc, sizeof(t_texture), PARSING, sys);
@@ -37,7 +37,7 @@ bool	lib_init(t_sys *sys)
 		return ((void)e_printf("%s%s\n", DEF_ERR, TEXT_ERR), false);
 	sys->textures->floor = rgb_converter(sys->data->floor);
 	sys->textures->ceiling = rgb_converter(sys->data->ceiling);
-	if (!init_img(sys->mlx, sys->img))
+	if (!init_img(sys))
 		return ((void)e_printf("Failed to load image and/or display\n"), false);
 	return (true);
 }

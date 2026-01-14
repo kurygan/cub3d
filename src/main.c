@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 21:01:24 by mkettab           #+#    #+#             */
-/*   Updated: 2026/01/14 22:45:23 by mkettab          ###   ########.fr       */
+/*   Updated: 2026/01/14 23:05:22 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	game_loop(void *param)
 {
 	t_sys *sys = (t_sys *)param;
-	(void)sys;
+	put_texture_on_img(sys, sys->textures->north, 0, 0);
 }
 
 int	main(int ac, char **av)
