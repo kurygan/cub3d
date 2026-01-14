@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:20:29 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/21 21:13:04 by mkettab          ###   ########.fr       */
+/*   Updated: 2026/01/14 20:56:04 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,12 @@ void	player_init(t_sys *sys, int x, int y, char card)
 	t_player	*player;
 
 	player = gc_calloc(sys, sizeof(t_player), PARSING);
-	player->x = x;
-	player->y = y;
-	if (card == 'N')
-		player->or = NORTH;
-	if (card == 'S')
-		player->or = SOUTH;
-	if (card == 'W')
-		player->or = WEST;
-	if (card == 'S')
-		player->or = EAST;
+	player->pos_x = (double)x;
+	player->pos_y = (double)y;
+	set_player_dir(player, card);
+	if (player->dir_x == 0)
+		player->fov_x = player->dir_y * -0.66;
+	else if (player->dir_y == 0)
+		player->fov_y = player->dir_x * 0.66;
 	sys->map->player = player;
 }

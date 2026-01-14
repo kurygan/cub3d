@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 03:54:28 by mkettab           #+#    #+#             */
-/*   Updated: 2026/01/14 20:04:18 by mkettab          ###   ########.fr       */
+/*   Updated: 2026/01/14 20:32:01 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,6 @@ typedef enum e_gc_type
 	BUFFER
 }	t_gc_type;
 
-typedef enum e_orientation
-{
-	NORTH,
-	EAST,
-	SOUTH,
-	WEST
-}	t_card;
-
 typedef struct s_gc
 {
 	void		*mem; // Memory Allocated
@@ -92,9 +84,12 @@ typedef struct s_map_data
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
-	t_card	or;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	fov_x;
+	double	fov_y;
 }	t_player;
 
 typedef struct s_texture
@@ -138,6 +133,7 @@ char			**map_copy(char **src, t_sys *sys);
 bool			lib_init(t_sys *sys);
 bool			verif_data(t_parse_data *data);
 uint32_t		rgb_converter(char	**rgb);
+void			set_player_dir(t_player *player, char card);
 
 // GARBAGE
 

@@ -6,19 +6,11 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 22:56:13 by mkettab           #+#    #+#             */
-/*   Updated: 2026/01/14 17:12:32 by mkettab          ###   ########.fr       */
+/*   Updated: 2026/01/14 20:11:00 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
-
-void	add_gc_tok(t_gc **garbage, t_gc *new, t_sys *sys)
-{
-	t_gc	*last;
-
-	sys->last->right = new;
-	new->left = last;
-}
 
 void	*gc_malloc(t_gc **garbage, size_t size, t_gc_type type, t_sys *sys)
 {
@@ -41,7 +33,10 @@ void	*gc_malloc(t_gc **garbage, size_t size, t_gc_type type, t_sys *sys)
 	if (!*garbage)
 		*garbage = temp;
 	else
-		add_gc_tok(garbage, temp, sys);
+	{
+		sys->last->right = temp;
+		temp->left = sys->last;
+	}
 	sys->last = temp;
 	return (mem);
 }
