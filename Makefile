@@ -25,8 +25,8 @@ MLX_ARCH = $(LIB_PATH)MLX42/build/libmlx42.a
 
 SRCS = main.c \
 	   parsing/parsing.c parsing/file.c parsing/map.c parsing/line_verif.c parsing/player_assignations.c \
-	   $(GC_DIR)gc_free.c $(GC_DIR)gc_gnl_utils.c $(GC_DIR)gc_gnl.c $(GC_DIR)gc_malloc.c $(GC_DIR)gc_utils.c $(GC_DIR)gc_split.c $(GC_DIR)gc_strdup.c $(GC_DIR)gc_substr.c \
-	   mlx/init_mlx.c \
+	   $(GC_DIR)free.c $(GC_DIR)gnl_utils.c $(GC_DIR)gnl.c $(GC_DIR)malloc.c $(GC_DIR)split.c $(GC_DIR)strdup.c $(GC_DIR)substr.c \
+	   mlx/init.c mlx/clear.c \
 	   utils/map_utils.c utils/mlx_utils.c
 
 OBJS = $(SRCS:.c=.o)
@@ -38,7 +38,7 @@ OBJS_PREF = $(addprefix $(OBJS_DIR), $(OBJS))
 
 SRCS_DIR = ./src/
 OBJS_DIR = ./.build/
-GC_DIR = ./garbage_collector/
+GC_DIR = ./gc/
 
 NAME = cub3d
 

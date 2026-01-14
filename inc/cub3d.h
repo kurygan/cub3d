@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 03:54:28 by mkettab           #+#    #+#             */
-/*   Updated: 2026/01/14 20:32:01 by mkettab          ###   ########.fr       */
+/*   Updated: 2026/01/14 22:39:59 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 # define INIT_ERR "MiniLibX42 failed to init.\033[0m"
 # define TEXT_ERR "Texture Loading failed.\033[0m"
 
+# define WIDTH 800
+# define HEIGHT 600
+
 typedef struct s_gc			t_gc;
 typedef struct s_parse_data	t_parse_data;
 typedef struct s_sys		t_sys;
@@ -39,6 +42,7 @@ typedef struct s_gnl		t_gnl;
 typedef struct s_array		t_array;
 typedef struct s_player		t_player;
 typedef struct s_texture	t_texture;
+typedef struct s_img		t_img;
 typedef enum e_gc_type		t_gc_type;
 typedef enum e_orientation	t_card;
 
@@ -111,6 +115,7 @@ typedef struct s_sys
 	t_texture		*textures;
 	mlx_t			*mlx;
 	t_gc			*last;
+	mlx_image_t		*img;
 }	t_sys;
 
 /***********************************COMMANDS***********************************/
@@ -134,6 +139,7 @@ bool			lib_init(t_sys *sys);
 bool			verif_data(t_parse_data *data);
 uint32_t		rgb_converter(char	**rgb);
 void			set_player_dir(t_player *player, char card);
+void			mlx_clear(t_sys *sys);
 
 // GARBAGE
 

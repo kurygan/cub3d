@@ -6,11 +6,17 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 21:01:24 by mkettab           #+#    #+#             */
-/*   Updated: 2025/11/21 23:22:14 by mkettab          ###   ########.fr       */
+/*   Updated: 2026/01/14 22:45:23 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+void	game_loop(void *param)
+{
+	t_sys *sys = (t_sys *)param;
+	(void)sys;
+}
 
 int	main(int ac, char **av)
 {
@@ -24,7 +30,9 @@ int	main(int ac, char **av)
 		return (gc_carbonize(&sys->gc), free(sys), 1);
 	if (!lib_init(sys))
 		return (gc_carbonize(&sys->gc), free(sys), 1);
+	mlx_loop_hook(sys->mlx, &game_loop, sys);
 	mlx_loop(sys->mlx);
+	mlx_clear(sys);
 	gc_carbonize(&sys->gc);
 	free(sys);
 	return (0);
